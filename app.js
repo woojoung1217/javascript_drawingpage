@@ -108,6 +108,10 @@ function onDoubleClick(event) {
 
 const onSaveClick = () => {
   const url = canvas.toDataURL();
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "mydrawing.png";
+  a.click();
 };
 canvas.addEventListener("dblclick", onDoubleClick);
 canvas.addEventListener("mousemove", onMove);

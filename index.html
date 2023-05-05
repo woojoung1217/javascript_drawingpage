@@ -7,14 +7,12 @@
     <link rel="stylesheet" href="style.css" />
     <title>canvas drawing</title>
   </head>
-  <in>
-    <canvas></canvas>
-    <input id="line-width" type="range" min="1" max="10" value="5"/>
-    <div>
-      <input type="color" id="color"></input>
-
-     <div
-        class="color-option"
+  <div class="color-options">
+    <input type="color" id="color"></input>
+    
+    
+    <div
+    class="color-option"
         style="background-color: #1abc9c"
         data-color="#1abc9c"
       ></div>
@@ -48,11 +46,7 @@
         style="background-color: #e74c3c"
         data-color="#e74c3c"
       ></div>
-      <div
-        class="color-option"
-        style="background-color: #95a5a6"
-        data-color="#95a5a6"
-      ></div>
+      
       <div
         class="color-option"
         style="background-color: #d35400"
@@ -69,14 +63,21 @@
         data-color="#e67e22"
       ></div>
     
+  </div>
+    <canvas></canvas>
+ 
+    <div class="btns">
+      <input id="line-width" type="range" min="1" max="10" value="5"/>
+      <button id="mode-btn">🩸Fill</button>
+      <button id="destroy-btn">💣Destroy</button>
+      <button id="eraser-btn">❌Eraser</button>
+     <label for="file">
+      Add Photo
+       <input type="file" accept="image/*" id="file"/>
+     </label>
+      <input type="text" placeholder="Add Text here " id="text"/>
+      <button id="save">🖼save Image</button>
     </div>
-
-    <button id="mode-btn">Fill</button>
-    <button id="destroy-btn">Destroy</button>
-    <button id="eraser-btn">Eraser</button>
-    <input type="file" accept="image/*" id="file"/>
-    <input type="text" placeholder="write and doubleclick" id="text"/>
-    <button id="save">save Image</button>
     <script src="app.js"></script>
   </body>
 </html>
