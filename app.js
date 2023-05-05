@@ -1,6 +1,10 @@
+const saveBtn = document.getElementById("save");
+
+const fileInput = document.getElementById("file");
 const modeBtn = document.getElementById("mode-btn");
 const destroyBtn = document.getElementById("destroy-btn");
 const eraserBtn = document.getElementById("eraser-btn");
+const textInput = document.getElementById("text");
 const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
 );
@@ -8,6 +12,7 @@ const canvas = document.querySelector("canvas");
 const lineWidth = document.getElementById("line-width");
 const color = document.getElementById("color");
 const ctx = canvas.getContext("2d");
+ctx.lineCap = "round";
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 800;
 canvas.lineWidth = lineWidth.value;
@@ -79,6 +84,32 @@ function onEraserClick() {
   modeBtn.innerText = "Fill";
 }
 
+function onFileChange(event) {
+  const file = event.target.files[0];
+  const url = URL.createObjectURL(file);
+  const image = new Image();
+  image.src = url;
+  image.onload = function () {
+    ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    fileInput.value = null;
+  };
+}
+
+function onDoubleClick(event) {
+  const text = textInput.value;
+  if (text != "") {
+    ctx.save();
+    ctx.font = "48px serif";
+    ctx.lineWidth = 1;
+    ctx.fillText(text, event.offsetX, event.offsetY);
+    ctx.restore();
+  }
+}
+
+const onSaveClick = () => {
+  const url = canvas.toDataURL();
+};
+canvas.addEventListener("dblclick", onDoubleClick);
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", onMouseDown);
 canvas.addEventListener("mouseup", onMouseUp);
@@ -90,3 +121,5 @@ colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
 modeBtn.addEventListener("click", onModeClick);
 destroyBtn.addEventListener("click", onDestroyClick);
 eraserBtn.addEventListener("click", onEraserClick);
+fileInput.addEventListener("change", onFileChange);
+saveBtn.addEventListener("click", onSaveClick);
